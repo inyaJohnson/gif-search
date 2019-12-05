@@ -1,44 +1,30 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import {Row, Col, Image} from 'react-bootstrap';
-import Axios from 'axios';
-import './style.css'
+import './style.css';
+import { connect } from 'react-redux';
+import fetchSingleGif from './actions/gif';
+
 class Gif extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            id: '',
-            title: '',
-            type: '',
-            createOn: '',
-            source: '',
-            url: ''
-        };
+        this.state = {}
     }
 
-    async componentDidMount(){
-        const apiKey = 'deokzgUjxm6QHQdp3H3aca1LSZcCpucc';
+    componentDidMount(){
+        const { compFetchGif } = this.props
         const id = this.props.match.params.id;
-        const result = await Axios.get(`http://api.giphy.com/v1/gifs/${id}?api_key=${apiKey}`);
-        const gif = await result.data.data
-        this.setState({
-            id: gif.id,
-            title: gif.title,
-            type: gif.type,
-            createOn: gif.import_datetime,
-            source: gif.source,
-            url: gif.images.downsized.url
-        })
+        compFetchGif(id);
     }
     
 
     render(){
-        const {id, title, type, createOn, source, url} = this.state;
-        console.log('State data === ', this.state);
+        const {id, title, type, createOn, source, rating, images} = this.props.gif.gif;
+        console.log('Images', images && images.downsized.url);
         return(
                 <Row>
                     <Col xs={6}>
-                        <Image src={url} alt='gif' width='300' height='300' className='gif' />
+                        <Image src={images && images.downsized.url} alt='gif' width='300' height='300' className='gif' />
                     </Col>
                     <Col xs={{span:6}} className='gif-detail'>
                        <ul >
@@ -47,6 +33,7 @@ class Gif extends Component{
                            <li>{type}</li>
                            <li>{createOn}</li>
                            <li>{source}</li>
+                            <li>{rating}</li>
                         </ul> 
                     </Col>
                 </Row>
@@ -54,4 +41,17 @@ class Gif extends Component{
     }
 }
 
-export default withRouter(Gif);
+const mapStateToProps = state => {
+    return {
+        gif : state.gif 
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        compFetchGif : (id) => dispatch(fetchSingleGif(id))    
+    }
+}
+
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gif));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Gif));

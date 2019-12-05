@@ -1,5 +1,8 @@
+import {FETCH_GIF_FAILED} from '../actions/gif';
+import { FETCH_GIF_FULLFILLED } from '../actions/gif';
+
 export default function reducer(state = {
-    gif : [],
+    gif : {},
     fetching: false,
     fetched: false,
     error: null
@@ -8,10 +11,10 @@ export default function reducer(state = {
         case "FETCH_GIF_START": {
             return {...state, fetching: true}
         }
-        case "FETCH_GIF_FULLFILLED":{
+        case FETCH_GIF_FULLFILLED:{
             return {...state, fetching: false, fetched: true, gif: action.payload}
         }
-        case "FETCH_GIF_FAILED":{
+        case FETCH_GIF_FAILED:{
             return {...state, fetching: false, fetched: false, gif: action.payload}
         }
         default: return state;

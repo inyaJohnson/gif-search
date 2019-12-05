@@ -6,7 +6,7 @@ export const FETCH_GIFS_FAILED = 'FETCH_GIFS_FAILED'
 
 export default function fetchGifs(searchWord){
     return function(dispatch){
-        Axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${searchWord}`).then((result)=>{
+        Axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${searchWord}`).then((result)=>{
             const gifs = result.data.data;
             dispatch({ 
                 type: FETCH_GIFS_FULLFILLED, 

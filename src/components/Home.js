@@ -1,30 +1,37 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Form, Figure, Image, InputGroup} from 'react-bootstrap';
-import {NavLink} from 'react-router-dom';
+import { Container, Row, Col, Figure, Image } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import fetchGifs from '../components/actions/gifs';
-import Search from './search.png';
+import Search from './Search';
 import './style.css';
 
 class Home extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            search : ''
+            searchWord : ''
         };
     }
 
-    handleChange = (e) =>{
-        const { compFetchGifs } = this.props
-        const search = e.target.value;
+    handleChange = event =>{
+        const searchWord = event.target.value;
         this.setState({
-            search
+            searchWord
         })
-        compFetchGifs(search)
+    }
+
+    handleSubmit = event =>{
+        event.preventDefault()
+        const { compFetchGifs } = this.props;
+        const { searchWord } = this.state;
+        compFetchGifs(searchWord)
     }
 
     render(){
         const { gifs, fetched } = this.props.gifs;
+        const { searchWord } = this.state;
+        const { handleChange, handleSubmit } = this;
         return(
             <Container fluid className='background'>
                 <Row>
@@ -32,38 +39,26 @@ class Home extends Component{
                         <h2 className='title'>Riby-Test</h2>
                     </Col>
                 </Row>
+                <Search searchWord={searchWord} searchWordChange={handleChange} searchWordSubmit={handleSubmit} />
                 <Row>
-                    <Col xs={{span:12, offset:0}} md={{span:10, offset:1}} className='search-input'>
-                        <Form class='search-form'>
-                            <InputGroup>
-                                <Form.Control size='lg' type='text' onChange={this.handleChange} 
-                                    value={this.state.search} placeholder='Search for GIF' className='search-input-field'/> 
-                                <InputGroup.Append>
-                                    <InputGroup.Text id="inputGroupAppend"><Image src={Search} alt='Search' width='20px' height='20px' /></InputGroup.Text>
-                                </InputGroup.Append>
-                            </InputGroup>
-                        </Form>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col xs={{span:12, offset:0}} md={{span:10, offset:1}} className='search'>
-                        
-                        {fetched && gifs.length > 0 && (
-                            gifs.map((item, key) =>{
-                                return(
-                                    <span key={key} className='gif'>
-                                        <NavLink to={`/gif/${item.id}`}>
-                                            <Figure>
-                                                <Image src={item.images.downsized.url} alt='gif' className='image'
-                                                    rounded width='180px'  height='150px' />
-                                                <Figure.Caption className='image-caption'>{item.title.split(' ')[0]}</Figure.Caption>
-                                            </Figure>
-                                        </NavLink>
-                                    </span>
-                                )
-                            })
-                        )}
+                    <Col md={{span:10, offset:1}} className='searchColumn'>
+                        <div className='searchContainer'>
+                            {fetched && gifs.length > 0 && (
+                                gifs.map((item, key) =>{
+                                    return(
+                                        <div key={key} className='gif'>
+                                            <NavLink to={`/gif/${item.id}`}>
+                                                <Figure>
+                                                    <Image src={item.images.downsized.url} alt='gif' className='image'
+                                                        rounded width='180px'  height='150px' />
+                                                    <Figure.Caption className='image-caption'>{item.title.split(' ')[0]}</Figure.Caption>
+                                                </Figure>
+                                            </NavLink>
+                                        </div>
+                                    )
+                                })
+                            )}
+                        </div>
                         
                     </Col>
                 </Row>

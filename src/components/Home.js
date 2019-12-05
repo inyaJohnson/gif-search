@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import {Row, Col, Form, Image} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 import Axios from 'axios';
+import {connect} from 'react-redux';
+
+
+connect((store) => {
+    return {
+        gif : store
+    };
+})
 
 class Home extends Component{
     constructor(){
@@ -26,7 +34,7 @@ class Home extends Component{
     }
 
     render(){
-        console.log(this.state.gif)
+        console.log(this.props.gif);
         return(
             <Row>
                 <Row>

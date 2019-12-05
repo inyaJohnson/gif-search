@@ -1,9 +1,61 @@
-.gif{
-    border: solid thick red;
+
+.background{
+    background-color: #fcfcfc;
+    /* background: url('./background.jpg') transparent no-repeat center; */
+    background-size: cover;
+    /* height: 100vh; */
+    padding: 20px;
 }
 
-.gif-detail{
-    border: solid thick red;
-    margin: 0;
-    padding: 0;
+.title{
+    color: white;
+    font-family:"Open Sans", sans-serif;
+    font-weight: bolder;
+    font-size: 50px;
+    color: blue;
 }
+
+.search-input{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-input-field{
+    font:  black;
+    background: transparent;
+}
+
+.search{
+    border-radius: 10px;
+    min-height: 70vh;
+    opacity: 0.9;
+
+}
+
+.gif-sub-container{ 
+    display: inline-flex;
+    flex-flow: row wrap;
+}
+
+.gif{
+    padding: 10px; 
+    
+}
+
+.image-caption{
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+#inputGroupAppend{
+    background-color: transparent;
+    border: none;
+    margin-left: -40px;
+    z-index: 200;
+}
+
+
+/* .search-icon{
+    margin-left: -20px;
+} */

@@ -56,6 +56,16 @@
 }
 
 
-/* .search-icon{
-    margin-left: -20px;
+.list-unstyled li{
+    font-size: large;
+}
+
+.gif-result{
+    min-height: 100vh;
+    display: flex;
+    align-content: center;
+}
+
+/* .gif-detail{
+    padding: 100px;
 } */

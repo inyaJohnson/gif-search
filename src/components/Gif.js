@@ -20,20 +20,19 @@ class Gif extends Component{
 
     render(){
         const {id, title, type, createOn, source, rating, images} = this.props.gif.gif;
-        console.log('Images', images && images.downsized.url);
         return(
-                <Row>
-                    <Col xs={6}>
+                <Row className='gif-result'>
+                    <Col xs={{span:3, offset:3}} className='gif-image '>
                         <Image src={images && images.downsized.url} alt='gif' width='300' height='300' className='gif' />
                     </Col>
                     <Col xs={{span:6}} className='gif-detail'>
-                       <ul >
-                           <li>{id}</li>
-                           <li>{title}</li>
-                           <li>{type}</li>
-                           <li>{createOn}</li>
-                           <li>{source}</li>
-                            <li>{rating}</li>
+                       <ul className='list-unstyled' >
+                           <li><strong>ID:</strong> {id}</li>
+                           <li><strong>Title:</strong> {title}</li>
+                           <li><strong>Giff Type:</strong> {type}</li>
+                           <li><strong>Created On:</strong> {createOn}</li>
+                           <li><strong>Source:</strong> {source}</li>
+                            <li><strong>Rating:</strong> {rating}</li>
                         </ul> 
                     </Col>
                 </Row>

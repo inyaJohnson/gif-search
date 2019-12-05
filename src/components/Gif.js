@@ -22,10 +22,10 @@ class Gif extends Component{
         const {id, title, type, createOn, source, rating, images} = this.props.gif.gif;
         return(
                 <Row className='gif-result'>
-                    <Col xs={{span:3, offset:3}} className='gif-image '>
+                    <Col xs={{span:12, offset:0}} md={{span:3, offset:3}} className='gif-image '>
                         <Image src={images && images.downsized.url} alt='gif' width='300' height='300' className='gif' />
                     </Col>
-                    <Col xs={{span:6}} className='gif-detail'>
+                    <Col xs={{span:12}} md={{span:6}} className='gif-detail'>
                        <ul className='list-unstyled' >
                            <li><strong>ID:</strong> {id}</li>
                            <li><strong>Title:</strong> {title}</li>

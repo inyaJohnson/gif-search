@@ -33,7 +33,7 @@ class Home extends Component{
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={{span:10, offset:1}} className='search-input'>
+                    <Col xs={{span:12, offset:0}} md={{span:10, offset:1}} className='search-input'>
                         <Form class='search-form'>
                             <InputGroup>
                                 <Form.Control size='lg' type='text' onChange={this.handleChange} 
@@ -47,7 +47,7 @@ class Home extends Component{
                 </Row>
 
                 <Row>
-                    <Col md={{span:10, offset:1}} className='search'>
+                    <Col xs={{span:12, offset:0}} md={{span:10, offset:1}} className='search'>
                         
                         {fetched && gifs.length > 0 && (
                             gifs.map((item, key) =>{
